@@ -21,7 +21,11 @@ import com.zhangsan.week1.domain.Brand;
 import com.zhangsan.week1.domain.Goods;
 import com.zhangsan.week1.domain.Type;
 import com.zhangsan.week1.service.GoodsService;
-
+/**
+ * 
+ * @author charles
+ *
+ */
 @Controller
 public class GoodsController {
 	@Resource
@@ -36,26 +40,26 @@ public class GoodsController {
 		return "goods";
 	}
 	
-	//Ìø×ªµ½Ôö¼ÓÒ³Ãæ //Ö»Ö§³ÖgetÇëÇó
+	//ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ //Ö»Ö§ï¿½ï¿½getï¿½ï¿½ï¿½ï¿½
 	@GetMapping("add")
 	public  String add() {
 		
 		return "add";
 	}
-	//Ö´ÐÐÔö¼Ó
+	//Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@ResponseBody
 	@PostMapping("add")
 	public boolean add(Goods goods,MultipartFile file) {
-		//ÅÐ¶ÏÊÇ·ñÉÏ´«ÎÄ¼þ
+		//ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½Ï´ï¿½ï¿½Ä¼ï¿½
 		if(null!=file && !file.isEmpty()) {
 			String path="d:/week1/";
-			//ÎªÁË·´ÕýÎÄ¼þÃû³ÆÖØ¸´¡£¸Ä±äÉÏ´« µÄÎÄ¼þÃû³Æ a.jpg
+			//Îªï¿½Ë·ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ a.jpg
 			String oldFileName = file.getOriginalFilename();
 			String fileName =UUID.randomUUID() + oldFileName.substring(oldFileName.lastIndexOf("."));
 			File f = new File(path ,fileName);
-			try {//Ð´ÈëÓ²ÅÌ
+			try {//Ð´ï¿½ï¿½Ó²ï¿½ï¿½
 				file.transferTo(f);
-				//ÉÌÆ·Í¼Æ¬µÄµØÖ·Ãû³Æ
+				//ï¿½ï¿½Æ·Í¼Æ¬ï¿½Äµï¿½Ö·ï¿½ï¿½ï¿½ï¿½
 				goods.setPic(fileName);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
@@ -65,14 +69,14 @@ public class GoodsController {
 		}
 		return goodsService.insert(goods) >0;
 	}
-	//ÀàÐÍ
+	//ï¿½ï¿½ï¿½ï¿½
 	@ResponseBody
 	@GetMapping("selectTypes")
 	public List<Type> selectTypes(){
 		return goodsService.selectTypes();
 	}
 	
-	///Æ·ÅÆ
+	///Æ·ï¿½ï¿½
 	@ResponseBody
 	@GetMapping("selectBrands")
 	public List<Brand> selectBrands(){
